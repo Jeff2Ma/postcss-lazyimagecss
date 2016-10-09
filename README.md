@@ -1,7 +1,7 @@
 # postcss-lazyimagecss 
 
-[![Build Status](https://travis-ci.org/Jeff2Ma/postcss-lazyimagecss.svg?branch=master)](https://travis-ci.org/glebmachine/postcss-easysprites)
-[![npm version](https://badge.fury.io/js/postcss-lazyimagecss.svg)](http://badge.fury.io/js/postcss-easysprites)
+[![Build Status](https://travis-ci.org/Jeff2Ma/postcss-lazyimagecss.svg?branch=master)](https://travis-ci.org/Jeff2Ma/postcss-lazyimagecss)
+[![npm version](https://badge.fury.io/js/postcss-lazyimagecss.svg)](http://badge.fury.io/js/postcss-lazyimagecss)
 
 [![NPM](https://nodei.co/npm/postcss-lazyimagecss.png)](https://nodei.co/npm/postcss-lazyimagecss/)
 
