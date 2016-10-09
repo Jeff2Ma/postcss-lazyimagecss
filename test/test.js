@@ -6,7 +6,7 @@ var noop = function () {};
 var lazyimagecss = require('../index.js');
 
 describe('postcss-lazyimagecss Unit est', function() {
-	it('Image `width` -> should be able to get `width` attributes.', function(done) {
+	it('Image `width` -> should be able to get `width` properties.', function(done) {
 		vfs.src('./test/src/css/style.css')
 			.pipe(postcss([lazyimagecss({
 				imagePath: ['../img','../slice']
@@ -20,7 +20,7 @@ describe('postcss-lazyimagecss Unit est', function() {
 			.on('end', done);
 	});
 
-	it('Image `height` -> should be able to get `height` attributes.', function(done) {
+	it('Image `height` -> should be able to get `height` properties.', function(done) {
 		vfs.src('./test/src/css/style.css')
 			.pipe(postcss([lazyimagecss({
 				imagePath: ['../img','../slice']
@@ -34,7 +34,7 @@ describe('postcss-lazyimagecss Unit est', function() {
 			.on('end', done);
 	});
 
-	it('Image `background-size` -> should be able to get `background-size` attributes.', function(done) {
+	it('Image `background-size` -> should be able to get `background-size` properties.', function(done) {
 	vfs.src('./test/src/css/style.css')
 		.pipe(postcss([lazyimagecss({
 			imagePath: ['../img','../slice']
