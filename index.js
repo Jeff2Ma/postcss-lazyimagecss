@@ -16,7 +16,6 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 		}, options);
 
 		var imagePath = options.imagePath;
-		var imagePathForIndex = options.imagePath;
 
 		if (imagePath.length) {
 			imagePath = '(' + options.imagePath.join('|') + '/)';
@@ -37,7 +36,7 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 				// var prop = decl.prop;
 				var CSSWidth = false;
 				var CSSHeight = false;
-				var	CSSBGSize = false;
+				var CSSBGSize = false;
 
 				nodes.forEach(function (node) {
 					if (node.prop === 'width') {
@@ -51,7 +50,6 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 					}
 				});
 
-				// var imagePathValue = value.match(/\(([^)]+)\)/)[1].replace(/["']/g, "");
 				var matchValue = imageRegex.exec(value);
 
 				if (!matchValue || matchValue[1].indexOf('data:') === 0) {
@@ -59,48 +57,43 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 				}
 
 				var relativePath = matchValue[1];
-				var relativeDirname = path.dirname(relativePath);
+				var inputDir = dirname(decl.source.input.file);
+				var absolutePath = path.join(inputDir, relativePath || '');
 
-				if (imagePathForIndex.indexOf(relativeDirname) !== -1) {
-					var inputDir = dirname(css.source.input.file);
-					var absolutePath = path.join(inputDir, relativePath || '');
+				if (value.indexOf('@2x') > -1) {
+					options.retina = true;
+				} else {
+					options.retina = false;
+				}
 
-					if (value.indexOf('@2x') > -1) {
-						options.retina = true;
-					} else {
-						options.retina = false;
-					}
+				var info = fastImageSize(absolutePath);
 
-					var info = fastImageSize(absolutePath);
+				if (info.type === 'unknown') {
+					console.log('unknown type: ' + absolutePath);
+					return;
+				}
 
-					if (info.type === 'unknown') {
-						console.log('unknown type: ' + absolutePath);
-						return;
-					}
+				var valueWidth, valueHeight;
 
-					var valueWidth, valueHeight;
+				if (options.retina) {
+					valueWidth = (info.width / 2) + 'px';
+					valueHeight = (info.height / 2) + 'px';
+				} else {
+					valueWidth = info.width + 'px';
+					valueHeight = info.height + 'px';
+				}
 
-					// retina hack
-					if (options.retina) {
-						valueWidth = (info.width / 2) + 'px';
-						valueHeight = (info.height / 2) + 'px';
-					} else {
-						valueWidth = info.width + 'px';
-						valueHeight = info.height + 'px';
-					}
+				// check if exites former css code.
+				if (options.width && !CSSWidth) {
+					rule.append({prop: 'width', value: valueWidth});
+				}
 
-					// check if exites former css code.
-					if (options.width && !CSSWidth) {
-						rule.append({prop: 'width', value: valueWidth});
-					}
+				if (options.height && !CSSHeight) {
+					rule.append({prop: 'height', value: valueHeight});
+				}
 
-					if (options.height && !CSSHeight) {
-						rule.append({prop: 'height', value: valueHeight});
-					}
-
-					if (options.backgroundSize && options.retina && !CSSBGSize) {
-						rule.append({prop: 'background-size', value: valueWidth + ' ' + valueHeight});
-					}
+				if (options.backgroundSize && options.retina && !CSSBGSize) {
+					rule.append({prop: 'background-size', value: valueWidth + ' ' + valueHeight});
 				}
 			});
 		});

@@ -151,5 +151,21 @@ describe('postcss-lazyimagecss Unit est', function() {
 			.on('data', noop)
 			.on('end', done);
 	});
+
+	it(' Multi path support -> should work in Multi path.', function(done) {
+		vfs.src('./test/src/css/second/second.css')
+			.pipe(postcss([lazyimagecss({
+				imagePath: ['../../slice']
+			})]))
+			.pipe(through2.obj(function(file, enc, cb){
+				content = file.contents.toString();
+				content.match(/width/g).length.should.equal(2);
+				content.match(/height/g).length.should.equal(2);
+				content.indexOf('width: 100px').should.be.above(0);
+				cb();
+			}))
+			.on('data', noop)
+			.on('end', done);
+	});
 });
 

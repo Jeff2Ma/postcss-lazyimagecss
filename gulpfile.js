@@ -20,9 +20,9 @@ gulp.task('test', function () {
 });
 
 gulp.task('css', function () {
-	return gulp.src('./test/src/css/*.css')
+	return gulp.src('./test/src/css/**/*.css')
 		.pipe(postcss([lazyimagecss({
-			imagePath: ['../img','../slice']
+			imagePath: ['../img', '../slice']
 		})]))
 		.pipe(gulp.dest('./test/dist/css'));
 });
