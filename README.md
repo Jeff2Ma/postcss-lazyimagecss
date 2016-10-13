@@ -40,10 +40,12 @@ var postcss = require('gulp-postcss');
 var lazyimagecss = require('postcss-lazyimagecss');
 
 gulp.task('css', function () {
-	.pipe(postcss([lazyimagecss({
-		imagePath: ['../img','../slice']
-	})]))
-	.pipe(gulp.dest('./dist/css'));
+	return gulp.src('./src/css/*.css')
+	    .pipe(another-plugin())
+		.pipe(postcss([lazyimagecss({
+			imagePath: ['../img','../slice']
+		})]))
+		.pipe(gulp.dest('./dist/css'));
 });
 ```	
 
