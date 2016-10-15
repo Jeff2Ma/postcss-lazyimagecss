@@ -26,7 +26,14 @@ Based on [gulp-lazyimagecss](https://github.com/weixin/gulp-lazyimagecss). Thank
 ```
 ## Installation
 
+Install with npm:
+
 	npm install postcss-lazyimagecss --save-dev
+	
+
+Or install width [yarn](https://github.com/yarnpkg/yarn):
+
+	yarn add postcss-lazyimagecss
 
 ## Usage
 

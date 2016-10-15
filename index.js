@@ -1,9 +1,29 @@
 var path = require('path');
+var fs = require('fs');
 var dirname = require('path').dirname;
 var postcss = require('postcss');
 var _ = require('lodash');
 var fastImageSize = require('./lib/fastimagesize');
 
+/**
+ * a helper with recursion to find the real image absolute path,
+ * deal with the isuuse like `../../../../../img.jpg` and so on.
+ */
+function fixAbsolutePath(dir, relative) {
+	// find the first time
+	var absolute = path.resolve(dir, relative);
+
+	if (!fs.existsSync(absolute)) {
+		relative = relative.replace('../', '');
+		// recursion, do it again
+		absolute = fixAbsolutePath(dir, relative);
+	}
+	return absolute;
+}
+
+/**
+ * main function
+ */
 module.exports = postcss.plugin('lazyimagecss', function (options) {
 	return function (css) {
 		options = options || {};
@@ -58,7 +78,8 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 
 				var relativePath = matchValue[1];
 				var inputDir = dirname(decl.source.input.file);
-				var absolutePath = path.join(inputDir, relativePath || '');
+
+				var absolutePath = fixAbsolutePath(inputDir, relativePath);
 
 				if (value.indexOf('@2x') > -1) {
 					options.retina = true;
@@ -67,6 +88,11 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 				}
 
 				var info = fastImageSize(absolutePath);
+
+				if (info === undefined) {
+					console.log('no exites file:' + absolutePath);
+					return;
+				}
 
 				if (info.type === 'unknown') {
 					console.log('unknown type: ' + absolutePath);
@@ -83,7 +109,6 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 					valueHeight = info.height + 'px';
 				}
 
-				// check if exites former css code.
 				if (options.width && !CSSWidth) {
 					rule.append({prop: 'width', value: valueWidth});
 				}
