@@ -4,5 +4,6 @@
 .idea
 node_modules/
 npm-debug.log
+CHANGELOG.md
 test
 .travis.yml
