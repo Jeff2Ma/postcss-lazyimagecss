@@ -7,16 +7,17 @@ var fastImageSize = require('./lib/fastimagesize');
 
 /**
  * a helper with recursion to find the real image absolute path,
- * deal with the isuuse like `../../../../../img.jpg` and so on.
+ * deal with the issue like `../../img.jpg` and so on.
+ * update: just do two times but no recursion.
  */
 function fixAbsolutePath(dir, relative) {
 	// find the first time
 	var absolute = path.resolve(dir, relative);
 
-	if (!fs.existsSync(absolute)) {
+	if (!fs.existsSync(absolute) && (relative.indexOf('../') > -1)) {
 		relative = relative.replace('../', '');
-		// recursion, do it again
-		absolute = fixAbsolutePath(dir, relative);
+		// find the second time
+		absolute = path.resolve(dir, relative);
 	}
 	return absolute;
 }
