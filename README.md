@@ -81,9 +81,9 @@ gulp.task('css', function () {
 ## Options
 - **imagePath** Set image path to be worked (e.g. `['../slice','../img']`)
 
-- **width**  Whether output `width` in CSS ( default: `true` )
+- **width**  Whether output `width` properties in CSS ( default: `true` )
 
-- **height**  Whether output `height` in CSS ( default: `true` )
+- **height**  Whether output `height` properties in CSS ( default: `true` )
 
-- **backgroundSize** Whether output `background-size` in CSS ( default: `true` )
+- **backgroundSize** Whether output `background-size` properties in CSS ( default: `true` )
 

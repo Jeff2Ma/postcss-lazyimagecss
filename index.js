@@ -50,8 +50,6 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 		css.walkRules(function (rule) {
 			rule.walkDecls(/^background(-image)?$/, function (decl) {
 				var rule = decl.parent;
-				// var ruleStr = rule.toString();
-				// var declStr = decl.toString();
 				var nodes = rule.nodes;
 				var value = decl.value;
 				// var prop = decl.prop;
