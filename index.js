@@ -2,6 +2,7 @@ var path = require('path');
 var fs = require('fs');
 var dirname = require('path').dirname;
 var postcss = require('postcss');
+var chalk = require('chalk');
 var _ = require('lodash');
 var fastImageSize = require('./lib/fastimagesize');
 
@@ -13,12 +14,21 @@ var fastImageSize = require('./lib/fastimagesize');
 function fixAbsolutePath(dir, relative) {
 	// find the first time
 	var absolute = path.resolve(dir, relative);
+	var ext = absolute.split('.')[1];
+
+	// if is not a image file or a directory
+	// if (ext != ('png' || 'svg' || 'jpeg' || 'jpg' || 'gif')) {
+	if (!ext) {
+		console.log('[' + chalk.blue('postcss-lazyimagecss') + '] ' + chalk.red('No a image file: ') + absolute);
+		return;
+	}
 
 	if (!fs.existsSync(absolute) && (relative.indexOf('../') > -1)) {
 		relative = relative.replace('../', '');
 		// find the second time
 		absolute = path.resolve(dir, relative);
 	}
+
 	return absolute;
 }
 
@@ -57,6 +67,22 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 				var CSSHeight = false;
 				var CSSBGSize = false;
 
+				var matchValue = imageRegex.exec(value);
+
+				if (!matchValue || matchValue[1].indexOf('data:') === 0) {
+					return;
+				}
+
+				var relativePath = matchValue[1];
+
+				var inputDir = dirname(decl.source.input.file);
+
+				var absolutePath = fixAbsolutePath(inputDir, relativePath);
+
+				if (absolutePath === undefined) {
+					return;
+				}
+
 				nodes.forEach(function (node) {
 					if (node.prop === 'width') {
 						CSSWidth = true;
@@ -69,17 +95,6 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 					}
 				});
 
-				var matchValue = imageRegex.exec(value);
-
-				if (!matchValue || matchValue[1].indexOf('data:') === 0) {
-					return;
-				}
-
-				var relativePath = matchValue[1];
-				var inputDir = dirname(decl.source.input.file);
-
-				var absolutePath = fixAbsolutePath(inputDir, relativePath);
-
 				if (value.indexOf('@2x') > -1) {
 					options.retina = true;
 				} else {
@@ -89,12 +104,12 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 				var info = fastImageSize(absolutePath);
 
 				if (info === undefined) {
-					console.log('no exites file:' + absolutePath);
+					console.log('[' + chalk.blue('postcss-lazyimagecss') + '] ' + chalk.red('No exites file: ') + absolutePath);
 					return;
 				}
 
 				if (info.type === 'unknown') {
-					console.log('unknown type: ' + absolutePath);
+					console.log('[' + chalk.blue('postcss-lazyimagecss') + '] ' + chalk.red('Unknown type: ') + absolutePath);
 					return;
 				}
 
