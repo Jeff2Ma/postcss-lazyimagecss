@@ -19,7 +19,7 @@ function fixAbsolutePath(dir, relative) {
 	// if is not a image file or a directory
 	// if (ext != ('png' || 'svg' || 'jpeg' || 'jpg' || 'gif')) {
 	if (!ext) {
-		console.log('[' + chalk.blue('postcss-lazyimagecss') + '] ' + chalk.red('No a image file: ') + absolute);
+		pluginLog('No a image file: ', absolute);
 		return;
 	}
 
@@ -30,6 +30,10 @@ function fixAbsolutePath(dir, relative) {
 	}
 
 	return absolute;
+}
+
+function pluginLog(str, arg) {
+	return console.log('[' + chalk.blue('postcss-lazyimagecss') + '] ' + chalk.red(str) + arg);
 }
 
 /**
@@ -104,12 +108,12 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 				var info = fastImageSize(absolutePath);
 
 				if (info === undefined) {
-					console.log('[' + chalk.blue('postcss-lazyimagecss') + '] ' + chalk.red('No exites file: ') + absolutePath);
+					pluginLog('No exites file: ', absolutePath);
 					return;
 				}
 
 				if (info.type === 'unknown') {
-					console.log('[' + chalk.blue('postcss-lazyimagecss') + '] ' + chalk.red('Unknown type: ') + absolutePath);
+					pluginLog('Unknown type: ', absolutePath);
 					return;
 				}
 
