@@ -14,11 +14,10 @@ var fastImageSize = require('./lib/fastimagesize');
 function fixAbsolutePath(dir, relative) {
 	// find the first time
 	var absolute = path.resolve(dir, relative);
-	var ext = absolute.split('.')[1];
 
-	// if is not a image file or a directory
-	// if (ext != ('png' || 'svg' || 'jpeg' || 'jpg' || 'gif')) {
-	if (!ext) {
+	// check if is a image file
+	var reg = /\.(jpg|jpeg|png|gif|svg|bmp)\b/i;
+	if (!reg.test(absolute)) {
 		pluginLog('No a image file: ', absolute);
 		return;
 	}
