@@ -3,6 +3,10 @@
 
 Change log for postcss-lazyimagecss.
 
+## [0.1.2] - 2016-11-07
+
+- Fix log grammar.
+
 ## [0.1.1] - 2016-11-05
 
 - Fix image file or a directory path bugs.

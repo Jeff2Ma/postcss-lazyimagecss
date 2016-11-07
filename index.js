@@ -18,7 +18,7 @@ function fixAbsolutePath(dir, relative) {
 	// check if is a image file
 	var reg = /\.(jpg|jpeg|png|gif|svg|bmp)\b/i;
 	if (!reg.test(absolute)) {
-		pluginLog('No a image file: ', absolute);
+		pluginLog('Not a image file: ', absolute);
 		return;
 	}
 
@@ -107,7 +107,7 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 				var info = fastImageSize(absolutePath);
 
 				if (info === undefined) {
-					pluginLog('File not exists: ', absolutePath);
+					pluginLog('File does not exist: ', absolutePath);
 					return;
 				}
 
