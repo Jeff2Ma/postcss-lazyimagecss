@@ -3,8 +3,6 @@
 [![Build Status](https://travis-ci.org/Jeff2Ma/postcss-lazyimagecss.svg?branch=master)](https://travis-ci.org/Jeff2Ma/postcss-lazyimagecss)
 [![npm version](https://badge.fury.io/js/postcss-lazyimagecss.svg)](http://badge.fury.io/js/postcss-lazyimagecss)
 
-[![NPM](https://nodei.co/npm/postcss-lazyimagecss.png)](https://nodei.co/npm/postcss-lazyimagecss/)
-
 A [PostCSS](https://github.com/postcss/postcss) plugin that generates images's CSS `width` & `height` properties from stylesheets automatically.
 
 Another lazy way to write CSS, feel free to use it :)

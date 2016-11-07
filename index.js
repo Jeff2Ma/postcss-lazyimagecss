@@ -107,7 +107,7 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 				var info = fastImageSize(absolutePath);
 
 				if (info === undefined) {
-					pluginLog('No exites file: ', absolutePath);
+					pluginLog('File not exists: ', absolutePath);
 					return;
 				}
 
