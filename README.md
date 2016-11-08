@@ -31,7 +31,7 @@ Install with npm:
 
 Or install width [yarn](https://github.com/yarnpkg/yarn):
 
-	yarn add postcss-lazyimagecss
+	yarn add postcss-lazyimagecss --dev
 
 ## Usage
 
