@@ -12,7 +12,11 @@ Based on [gulp-lazyimagecss](https://github.com/weixin/gulp-lazyimagecss). Thank
 ```css
 /* Input */
 .icon-close {
-	background-image: url(../slice/icon-close.png);
+	background-image: url(../slice/icon-close.png); //icon-close.png - 16x16
+}
+
+.icon-new {
+	background-image: url(../slice/icon-new@2x.png); //icon-new@2x.png - 16x16
 }
 	
 /* Output */
@@ -21,6 +25,14 @@ Based on [gulp-lazyimagecss](https://github.com/weixin/gulp-lazyimagecss). Thank
 	width: 16px;
 	height: 16px;
 }
+
+.icon-new {
+	background-image: url(../slice/icon-new@2x.png);
+	width: 8px;
+	height: 8px;
+	background-size: 8px 8px;
+}
+
 ```
 ## Installation
 
