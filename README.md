@@ -1,5 +1,7 @@
 # postcss-lazyimagecss 
 
+<img align="right" width="130" height="130" title="PostCSS" src="http://postcss.github.io/postcss/logo.svg">
+
 [![Build Status](https://travis-ci.org/Jeff2Ma/postcss-lazyimagecss.svg?branch=master)](https://travis-ci.org/Jeff2Ma/postcss-lazyimagecss)
 [![npm version](https://badge.fury.io/js/postcss-lazyimagecss.svg)](http://badge.fury.io/js/postcss-lazyimagecss)
 
@@ -34,6 +36,18 @@ Based on [gulp-lazyimagecss](https://github.com/weixin/gulp-lazyimagecss). Thank
 }
 
 ```
+
+## Features
+
+- Support `jpg`/`jpeg`/`png`/`gif`/`bmp`/`svg` file type.
+
+- Support retina image (file name should like `demo@2x.png`).
+
+- Both `background-image: url()` and `background: url()` can be detected successfully.
+
+- CSS property generating will be ignored if any of those `width` / `height` / `background-size` already set.
+
+
 ## Installation
 
 Install with npm:
@@ -97,3 +111,13 @@ gulp.task('css', function () {
 
 - **backgroundSize** Whether output `background-size` properties in CSS ( default: `true` )
 
+## Contributing
+
+[Issues](https://github.com/Jeff2Ma/postcss-lazyimagecss/issues/) and [Pull requests](https://github.com/Jeff2Ma/postcss-lazyimagecss/pulls) are welcome.
+
+```shell
+$ git clone https://github.com/Jeff2Ma/postcss-lazyimagecss
+$ cd postcss-lazyimagecss
+$ npm i
+$ gulp
+```
