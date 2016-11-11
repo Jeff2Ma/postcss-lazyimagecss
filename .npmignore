@@ -6,4 +6,5 @@ node_modules/
 npm-debug.log
 CHANGELOG.md
 test
+gulpfile.js
 .travis.yml

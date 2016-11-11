@@ -7,9 +7,8 @@ var _ = require('lodash');
 var fastImageSize = require('./lib/fastimagesize');
 
 /**
- * a helper with recursion to find the real image absolute path,
+ * a helper to find the real image absolute path,
  * deal with the issue like `../../img.jpg` and so on.
- * update: just do two times but no recursion.
  */
 function fixAbsolutePath(dir, relative) {
 	// find the first time
@@ -113,6 +112,12 @@ module.exports = postcss.plugin('lazyimagecss', function (options) {
 
 				if (info.type === 'unknown') {
 					pluginLog('Unknown type: ', absolutePath);
+					return;
+				}
+
+				// check if even dimensions
+				if (value.indexOf('@2x') > -1 && (info.width % 2 !== 0 || info.height % 2 !== 0)) {
+					pluginLog('Should have even dimensions: ', absolutePath);
 					return;
 				}
 
