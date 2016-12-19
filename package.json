@@ -1,6 +1,6 @@
 {
   "name": "postcss-lazyimagecss",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A PostCSS plugin that generates images's CSS width & height properties from stylesheets automatically.",
   "main": "index.js",
   "directories": {
