@@ -3,6 +3,10 @@
 
 Change log for postcss-lazyimagecss.
 
+## [0.1.3] - 2016-12-21
+
+- Add support for detecting even dimensions.
+
 ## [0.1.2] - 2016-11-07
 
 - Fix log grammar.
