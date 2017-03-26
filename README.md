@@ -1,5 +1,7 @@
 # postcss-lazyimagecss 
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Jeff2Ma/postcss-lazyimagecss.svg)](https://greenkeeper.io/)
+
 <img align="right" width="130" height="130" title="PostCSS" src="http://postcss.github.io/postcss/logo.svg">
 
 [![Build Status](https://travis-ci.org/Jeff2Ma/postcss-lazyimagecss.svg?branch=master)](https://travis-ci.org/Jeff2Ma/postcss-lazyimagecss)
