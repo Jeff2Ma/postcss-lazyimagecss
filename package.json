@@ -19,7 +19,7 @@
     "gulp-mocha": "^4.1.0",
     "gulp-postcss": "^7.0.0",
     "mocha": "^3.4.2",
-    "should": "^11.1.0",
+    "should": "^12.0.0",
     "through2": "^2.0.1",
     "vinyl-fs": "^2.4.3"
   },
