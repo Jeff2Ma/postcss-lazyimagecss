@@ -12,7 +12,7 @@
     "postcss": "^6.0.0"
   },
   "devDependencies": {
-    "eslint": "^3.7.1",
+    "eslint": "^4.6.0",
     "eslint-config-xo": "^0.18.1",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
